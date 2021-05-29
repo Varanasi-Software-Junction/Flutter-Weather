@@ -20,7 +20,8 @@ class _WeatherStarter extends State<WeatherStarter> {
   //*****************************************************
 
   void getLocation() {
-    setState(() {
+    setState(()
+        data="Getting ";
       var location = getCurrentLocation();
 Position position=location;
       data = position.toString() + position.latitude.toString() + "," + position.longitude.toString();
