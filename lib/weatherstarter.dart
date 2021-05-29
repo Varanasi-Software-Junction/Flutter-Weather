@@ -13,20 +13,19 @@ class _WeatherStarter extends State<WeatherStarter> {
   dynamic getCurrentLocation() async {
     Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.low);
+    print("Async");
     print(position);
+    data = position.toString();
     return position;
   }
 
   //*****************************************************
 
   void getLocation() {
-    setState(()
-        {
-        data="Getting ";
+    setState(() {
+      data="getting";
       var location = getCurrentLocation();
-      print(location);
-Position position=location;
-      data = position.toString() + position.latitude.toString() + "," + position.longitude.toString();
+      data="done";
     });
   }
 
