@@ -20,7 +20,7 @@ void f1()
 Future  f2()
 async
 {
-  String result="ss";
+  String result="";
   Duration duration=Duration(seconds: 10);
  await Future.delayed(duration,() {
     print("F2");

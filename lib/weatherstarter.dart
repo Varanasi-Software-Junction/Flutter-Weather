@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-
+import 'package:async/async.dart';
 class WeatherStarter extends StatefulWidget {
   _WeatherStarter createState() {
     return _WeatherStarter();
@@ -10,25 +10,26 @@ class WeatherStarter extends StatefulWidget {
 class _WeatherStarter extends State<WeatherStarter> {
   String data = "Location";
   //*********************************************88
-  Future getCurrentLocation()  {
-    Position data;
-    setState(() async {
-      Position position = await Geolocator.getCurrentPosition(
+  Future getCurrentLocation()  async {
+    Position position;
+
+      position =await  Geolocator.getCurrentPosition(
           desiredAccuracy: LocationAccuracy.low);
       print("Async");
       print(position);
-      data = position.toString();
-    });
-    return data;
+      //data = position.toString();
+
+
+    return position.toString();
   }
 
   //*****************************************************
 
-  void getLocation() async {
-    setState(() {
+  void getLocation()  {
+    setState(() async {
       //data="getting";
-      var location =await getCurrentLocation();
-      //data="done";
+      var location = await getCurrentLocation();
+      data=location.toString();
     });
   }
 
@@ -44,9 +45,9 @@ class _WeatherStarter extends State<WeatherStarter> {
           "Second",
           style: TextStyle(color: Colors.yellow),
         ),
-        onPressed: () {
+        onPressed: ()async {
           print("Hello");
-          getLocation();
+         await getLocation();
         },
       ),
     ]);
