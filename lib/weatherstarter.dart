@@ -10,7 +10,8 @@ class WeatherStarter extends StatefulWidget {
 class _WeatherStarter extends State<WeatherStarter> {
   String data = "Location";
   //*********************************************88
-  dynamic getCurrentLocation()  {
+  Future getCurrentLocation()  {
+    Position data;
     setState(() async {
       Position position = await Geolocator.getCurrentPosition(
           desiredAccuracy: LocationAccuracy.low);
@@ -18,16 +19,16 @@ class _WeatherStarter extends State<WeatherStarter> {
       print(position);
       data = position.toString();
     });
-    return null;
+    return data;
   }
 
   //*****************************************************
 
-  void getLocation() {
+  void getLocation() async {
     setState(() {
-      data="getting";
-      var location = getCurrentLocation();
-      data="done";
+      //data="getting";
+      var location =await getCurrentLocation();
+      //data="done";
     });
   }
 
