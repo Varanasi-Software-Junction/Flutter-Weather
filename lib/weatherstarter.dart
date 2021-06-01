@@ -27,17 +27,17 @@ class _WeatherStarter extends State<WeatherStarter> {
 
   {
     super.initState();
-  setData() ;
+    ()async
+    {
+      var location = await getLocation();
+      setState(() {
+        data = location.toString();
+      });
+    }();
 
 
 }
-void  setData() async
-  {
-  var location = await getLocation();
-  setState(()  {
-  data = location.toString();
-  });
-}
+
   //*****************************************************
 
   Future getLocation() async {
