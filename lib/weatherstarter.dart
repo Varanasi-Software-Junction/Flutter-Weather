@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:async/async.dart';
+
 class WeatherStarter extends StatefulWidget {
   _WeatherStarter createState() {
     return _WeatherStarter();
@@ -10,27 +11,25 @@ class WeatherStarter extends StatefulWidget {
 class _WeatherStarter extends State<WeatherStarter> {
   String data = "Location";
   //*********************************************88
-  Future getCurrentLocation()  async {
+  Future getCurrentLocation() async {
     Position position;
 
-      position =await  Geolocator.getCurrentPosition(
-          desiredAccuracy: LocationAccuracy.low);
-      print("Async");
-      print(position);
-      //data = position.toString();
-
+    position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.low);
+    print("Async");
+    print(position);
+    //data = position.toString();
 
     return position.toString();
   }
 
   //*****************************************************
 
-  void getLocation()  {
-    setState(() async {
-      //data="getting";
-      var location = await getCurrentLocation();
-      data=location.toString();
-    });
+  Future getLocation() async {
+    //data="getting";
+    var location = await getCurrentLocation();
+
+    return location;
   }
 
   @override
@@ -42,12 +41,17 @@ class _WeatherStarter extends State<WeatherStarter> {
       ),
       FlatButton(
         child: Text(
-          "Second",
+          "Press This",
           style: TextStyle(color: Colors.yellow),
         ),
-        onPressed: ()async {
+        onPressed: () async{
           print("Hello");
-         await getLocation();
+
+
+            var location = await getLocation();
+          setState(()  {
+            data = location.toString();
+          });
         },
       ),
     ]);
