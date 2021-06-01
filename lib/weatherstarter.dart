@@ -22,7 +22,22 @@ class _WeatherStarter extends State<WeatherStarter> {
 
     return position.toString();
   }
+@override
+  void initState()
 
+  {
+    super.initState();
+  setData() ;
+
+
+}
+void  setData() async
+  {
+  var location = await getLocation();
+  setState(()  {
+  data = location.toString();
+  });
+}
   //*****************************************************
 
   Future getLocation() async {
