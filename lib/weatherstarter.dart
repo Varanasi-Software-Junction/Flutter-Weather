@@ -38,17 +38,16 @@ Uri uri=Uri.parse(url);
 @override
   void initState()
 
-  {data="";
+  {
     super.initState();
-    /*()async
+    ()async
     {
       var location = await getLocation();
       setState(() {
-        data ="";// location.toString();
+        data = location.toString();
       });
     }();
-    *
-     */
+
 
 
 }
@@ -77,7 +76,7 @@ Uri uri=Uri.parse(url);
     ),
       RaisedButton(
         child: Text(
-          "Press This",
+          "Get Weather",
           style: TextStyle(color: Colors.yellow),
         ),
         onPressed: () async{
