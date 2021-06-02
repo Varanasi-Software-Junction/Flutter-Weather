@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:async/async.dart';
-
+import 'package:http/http.dart' as http;
 class WeatherStarter extends StatefulWidget {
   _WeatherStarter createState() {
     return _WeatherStarter();
@@ -10,6 +10,18 @@ class WeatherStarter extends StatefulWidget {
 
 class _WeatherStarter extends State<WeatherStarter> {
   String data = "Location";
+  Future getCurrentData() async {
+    http.Response response;
+String url="http://varanasikshetra.com/hello.txt";
+Uri uri=Uri.parse(url);
+
+    response = await http.get(uri);
+    print("Async");
+    print(response.body);
+    //data = position.toString();
+
+    return response.body;
+  }
   //*********************************************88
   Future getCurrentLocation() async {
     Position position;
@@ -63,7 +75,7 @@ class _WeatherStarter extends State<WeatherStarter> {
           print("Hello");
 
 
-            var location = await getLocation();
+            var location = await getCurrentData();
           setState(()  {
             data = location.toString();
           });
