@@ -9,10 +9,11 @@ class WeatherStarter extends StatefulWidget {
 }
 
 class _WeatherStarter extends State<WeatherStarter> {
+  String apikey="4a1f8a61b74546825af1e0be106e797b";
   String data = "Location";
   Future getCurrentData() async {
     http.Response response;
-String url="http://varanasikshetra.com/hello.txt";
+String url="https://api.openweathermap.org/data/2.5/forecast?q=Varanasi&appid=$apikey";
 Uri uri=Uri.parse(url);
 
     response = await http.get(uri);
@@ -37,15 +38,17 @@ Uri uri=Uri.parse(url);
 @override
   void initState()
 
-  {
+  {data="";
     super.initState();
-    ()async
+    /*()async
     {
       var location = await getLocation();
       setState(() {
-        data = location.toString();
+        data ="";// location.toString();
       });
     }();
+    *
+     */
 
 
 }
@@ -62,11 +65,17 @@ Uri uri=Uri.parse(url);
   @override
   Widget build(BuildContext context) {
     return Column(children: [
-      Text(
+    Expanded(
+    flex: 1,
+    child: new SingleChildScrollView(
+      child:Text(
         data,
         style: TextStyle(color: Colors.teal),
-      ),
-      FlatButton(
+      ) ,
+    scrollDirection: Axis.vertical,
+    ),
+    ),
+      RaisedButton(
         child: Text(
           "Press This",
           style: TextStyle(color: Colors.yellow),
