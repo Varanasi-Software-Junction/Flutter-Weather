@@ -1,34 +1,16 @@
 import 'dart:io';
 import 'package:async/async.dart';
+import 'dart:convert';
 void main()
 {
-callFunctions();
+  String s='{"name":"Champak","age":"51","books":[{"name":"Recursion Sutras"},{"name":"OOPS"}]}';
 
-}
-void callFunctions ()
-async
-{
-  f1();
- String value=await f2() ;
- print("F2 $value");
-  f3();
-}
-void f1()
-{
-  print("F1");
-}
-Future  f2()
-async
-{
-  String result="";
-  Duration duration=Duration(seconds: 10);
- await Future.delayed(duration,() {
-    print("F2");
-    result="F2";
-  });
-  return result;
-}
-void f3()
-{
-  print("F3");
+  var x=jsonDecode (s);
+  print(x);
+print(x['name']);
+print(x['age']);
+  print(x['books']);
+  print(x['books'][0]);
+  print(x['books'][0]['name']);
+
 }
