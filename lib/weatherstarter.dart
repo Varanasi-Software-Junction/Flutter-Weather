@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:async/async.dart';
 import 'package:http/http.dart' as http;
+import 'weatherdata.dart';
 class WeatherStarter extends StatefulWidget {
   _WeatherStarter createState() {
     return _WeatherStarter();
@@ -9,20 +10,14 @@ class WeatherStarter extends StatefulWidget {
 }
 
 class _WeatherStarter extends State<WeatherStarter> {
+  _WeatherStarter()
+  {
+    url="https://api.openweathermap.org/data/2.5/forecast?q=Varanasi&appid=$apikey";
+  }
   String apikey="4a1f8a61b74546825af1e0be106e797b";
   String data = "Location";
-  Future getCurrentData() async {
-    http.Response response;
-String url="https://api.openweathermap.org/data/2.5/forecast?q=Varanasi&appid=$apikey";
-Uri uri=Uri.parse(url);
-
-    response = await http.get(uri);
-    print("Async");
-    print(response.body);
-    //data = position.toString();
-
-    return response.body;
-  }
+WeatherData weather=WeatherData();
+  String url="";
   //*********************************************88
   Future getCurrentLocation() async {
     Position position;
@@ -83,9 +78,11 @@ Uri uri=Uri.parse(url);
           print("Hello");
 
 
-            var location = await getCurrentData();
+           // var location = await getCurrentData();
+          weather.url=url;
+          await weather.getCurrentData();
           setState(()  {
-            data = location.toString();
+            data = weather.data;
           });
         },
       ),
