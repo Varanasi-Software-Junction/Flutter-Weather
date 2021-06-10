@@ -1,16 +1,17 @@
 import 'dart:io';
 import 'package:async/async.dart';
 import 'dart:convert';
+import 'package:vsjweather/networkdownloader.dart';
+import 'package:vsjweather/weatherdata.dart';
 void main()
 {
-  String s='{"name":"Champak","age":"51","books":[{"name":"Recursion Sutras"},{"name":"OOPS"}]}';
+  f();
 
-  var x=jsonDecode (s);
-  print(x);
-print(x['name']);
-print(x['age']);
-  print(x['books']);
-  print(x['books'][0]);
-  print(x['books'][0]['name']);
-
+}
+void f ()async
+{
+  WeatherData wd=WeatherData();
+  await wd.getWeather();
+  print(wd.data);
+  print(wd.temp);
 }

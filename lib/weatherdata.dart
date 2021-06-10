@@ -1,24 +1,24 @@
+import 'dart:convert';
+
 import 'package:http/http.dart' as http;
 import 'package:async/async.dart';
-import 'weatherstarter.dart';
+import 'package:vsjweather/networkdownloader.dart';
+//import 'weatherstarter.dart';
 class WeatherData
 {
+  String apikey="4a1f8a61b74546825af1e0be106e797b";
+  String url="";
+  double temp;
   WeatherData()
   {
-
+url="https://api.openweathermap.org/data/2.5/forecast?q=Varanasi&appid=$apikey";;
   }
-String url="";
-String data="";
 
-  Future getCurrentData() async {
-    http.Response response;
+dynamic data="";
 
-    Uri uri=Uri.parse(url);
 
-    response = await http.get(uri);
-    print(response.body);
-    data=response.body;
-
-    return response.body;
+  void getWeather() async {
+    data=await NetworkDownloader.getNetworkData(url);
+temp=double.parse( data["list"][0]["main"]["temp"].toString())-273;
   }
 }

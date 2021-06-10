@@ -80,9 +80,9 @@ WeatherData weather=WeatherData();
 
            // var location = await getCurrentData();
           weather.url=url;
-          await weather.getCurrentData();
+          await weather.getWeather();
           setState(()  {
-            data = weather.data;
+            data = weather.data.toString();
           });
         },
       ),
