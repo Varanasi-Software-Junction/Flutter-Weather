@@ -39,9 +39,11 @@ class _WeatherStarter extends State<WeatherStarter> {
     super.initState();
     () async {
       var location = await getLocation();
-      setState(() {
-        data = location.toString();
-      });
+      setState(
+        () {
+          data = location.toString();
+        },
+      );
     }();
   }
 
@@ -56,38 +58,43 @@ class _WeatherStarter extends State<WeatherStarter> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-      Expanded(
-        flex: 1,
-        child: new SingleChildScrollView(
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Expanded(
+          flex: 1,
+          child: new SingleChildScrollView(
+            child: Text(
+              data,
+              style: TextStyle(
+                  color: Colors.teal,
+                  backgroundColor: Colors.amber,
+                  fontSize: 24),
+            ),
+            scrollDirection: Axis.vertical,
+          ),
+        ),
+        ElevatedButton(
           child: Text(
-            data,
+            "Get Weather",
             style: TextStyle(
-                color: Colors.teal,
-                backgroundColor: Colors.amber,
-                fontSize: 24),
+              color: Colors.yellow,
+            ),
           ),
-          scrollDirection: Axis.vertical,
-        ),
-      ),
-      RaisedButton(
-        child: Text(
-          "Get Weather",
-          style: TextStyle(
-            color: Colors.yellow,
-          ),
-        ),
-        onPressed: () async {
-          print("Hello");
+          onPressed: () async {
+            print("Hello");
 
-          // var location = await getCurrentData();
-          weather.url = url;
-          await weather.getWeather();
-          setState(() {
-            data = weather.data.toString();
-          });
-        },
-      ),
-    ]);
+            // var location = await getCurrentData();
+            weather.url = url;
+            await weather.getWeather();
+            setState(
+              () {
+                data = weather.data.toString();
+              },
+            );
+          },
+        ),
+      ],
+    );
   }
 }

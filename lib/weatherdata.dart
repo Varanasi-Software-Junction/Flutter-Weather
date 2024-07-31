@@ -8,18 +8,19 @@ import 'package:vsjweather/networkdownloader.dart';
 class WeatherData {
   String apikey = "4a1f8a61b74546825af1e0be106e797b";
   String url = "";
-  double temp;
+  double temp = 0;
 
   WeatherData() {
     url =
         "https://api.openweathermap.org/data/2.5/forecast?q=Varanasi&appid=$apikey";
-    ;
+
   }
 
   dynamic data = "";
 
-  void getWeather() async {
+  dynamic getWeather() async {
     data = await NetworkDownloader.getNetworkData(url);
     temp = double.parse(data["list"][0]["main"]["temp"].toString()) - 273;
+    return 0;
   }
 }
